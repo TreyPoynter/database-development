@@ -2,14 +2,6 @@ import * as readline from 'node:readline/promises';
 import {stdin as input, stdout as output} from 'node:process';
 const rl = readline.createInterface({input, output});
 
-async function convertToCelsius() {
-    const temp = parseFloat(await rl.question("Enter Temperature in Fahrenheit : "));
-    return (temp-32)*(5/9);
-}
-async function convertToFahrenheit() {
-    return (parseFloat(await rl.question("Enter Temperature in Celsius : "))-32)*5/9;
-}
-
 let menuSelection;
 let convertedTemp = 0;
 do {
