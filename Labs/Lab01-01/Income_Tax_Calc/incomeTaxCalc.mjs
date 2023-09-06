@@ -45,7 +45,7 @@ if (maritalStatus === 'single') {
 }
 
 if (!taxesOwed || taxesOwed <= 0) {
-    console.log("ERROR");
+    console.error("ERROR");
 }
 else {
     console.log(`Income Tax : $${Math.ceil(taxesOwed)}`);
