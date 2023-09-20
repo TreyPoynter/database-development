@@ -1,0 +1,23 @@
+-- QUERYING
+1. db.movies.find()
+2. db.theaters.find()
+3. db.movies.find({genres:"Documentary"})
+4. db.movies.find({$and:[{"imdb.rating":{$gt:7.5}}, {"imdb.votes":{$gte:10000}}]})
+5. db.movies.find({countries:"France"})
+6. db.movies.find({year:2010})
+7. db.theaters.find({"location.geo":{$near:{$geometry: { type: "Point", coordinates: [-90.2481045, 38.6527733]}, $maxDistance:160934}}})
+8. db.comments.find({ "movie_id": ObjectId("573a1393f29313caabcdd916") }).sort({ "date": -1 }).limit(10)
+9. db.comments.aggregate([{ $match: { movie_id: ObjectId("573a1393f29313caabcdbe7c") } }, { $sort: { date: -1 } }, { $limit: 10 }])
+10. db.movies.aggregate([{ $match: { "tomatoes.viewer.rating": { $exists: true } } }, { $sort: { "tomatoes.viewer.rating": -1 } }, { $limit: 10 }])
+
+-- MANIPULATING
+1. db.users.insertOne({name:"Trey Poynter", email:"treypoynter@gameofthron.es", password:"ghr34uygru234gbrjh23r323@$"})
+2. db.movies.insertOne({plot:"Sea of Thieves we sailing with the team",genres:["Adventure"],runtime:46,rated:"PASSED",cast:["Theb SoT","Crunk"],num_mflix_comments:0,poster:"IN PROGRESS",title:"DOUBLE GUNNED",fullplot:"Sea of Thieves we sailing with the team heading up north as far as the eye can see",languages:["English"],released:new Date("2020-04-18T00:00:00.000+00:00"),directors:["Joe Neate"],writers:["Pirate Lord"],awards:["NONE"],lastUpdated:"2023-08-14 08:32:23.4680000",year:2020,imdb:{rating:10,votes:0,id:78435},countries:["USA"],type:"movie",tomatoes:{viewer:{rating:5.0,numReviews:0,meter:46},dvd:new Date("2001-11-27T00:00:00.000+00:00"),critic:{rating:10,numRevienumReviews:0,meter:12},lastUpdated:new Date("2015-09-17T17:22:42.000+00:00"),rotten:0,production:"Rare",fresh:0}})
+3. db.theaters.insertOne({ theaterId: 1051, location: { address: { street1: "7001 Fayetteville Rd", city: "Durham", state: "NC", zipcode: "27713" }, geo: { type: "Point", coordinates: [-78.934631, 35.907135] } } })
+4. db.comments.insertOne({name:"Trey Poynter", email:"treypoynter@gameofthron.es", movie_id:ObjectId("573a1391f29313caabcd6f98"), text:"Mid", date:new Date("2023-09-20T00:00:00.000+00:00")})
+5. db.movies.updateOne({_id:ObjectId("573a1390f29313caabcd6223")}, {$set:{"imdb.rating":2, "tomatoes.viewer.rating":2.1}})
+6. db.movies.updateOne({_id:ObjectId("573a1390f29313caabcd6223")}, {$push:{countries:"Finland"}})
+7. db.movies.updateOne({_id:ObjectId("573a1390f29313caabcd6223")}, {$push:{genres:"Mystery"}})
+8. db.movies.updateOne({_id:ObjectId("573a1390f29313caabcd6223")}, {$set:{actors:["Ryan Reynolds", "Theb SoT"]}})
+9. db.theaters.deleteOne({theaterId:101})
+10. db.users.deleteOne({name:"Hot Pie"})
