@@ -1,0 +1,42 @@
+db.Bug.createIndex({title: 1})
+db.User.createIndex({givenName: 1})
+
+db.Bug.insertOne({
+    title: "My Super Awesome Bug",
+    description: "it's an awesome bug trust me",
+    reproduceSteps: ["Click on that", "Click on this", "system dies"],
+    author: {
+        _id: ObjectId()
+    },
+    dateCreated: new Date("2023-09-21T00:00:00.000+00:00"),
+    classification: "Unclassified",
+    comments: [
+        {
+            _id: ObjectId(),
+            _userId: ObjectId(),
+            fullName: "John Doe",
+            comment: "This bug sucks",
+            createdOn: new Date("2023-09-21T00:00:00.000+00:00")
+        }
+    ],
+    testCases: [
+        {
+            _userId: ObjectId(),
+            isPassed: false,
+            createdOn: new Date("2023-09-21T00:00:00.000+00:00"),
+            version: "v0.1.0"
+        }
+    ],
+    isClosed: false,
+    timeLog: [
+        {
+            _userId: ObjectId(),
+            hoursWorked: 46
+        }
+    ],
+    assignedTo: {
+        _userId: ObjectId(),
+        fullName: "Trey Poynter"
+    }
+})
+db.User.insertOne({email: "treypoynter@comp.com", password: "1234", role:["Developer"], fullName:"Trey Poynter", givenName:"Trey", familyName:"Poynter"})
