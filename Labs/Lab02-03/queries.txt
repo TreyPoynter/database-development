@@ -1,0 +1,124 @@
+1. db.movies.insertOne({
+title:"The Super Mario Bros. Movie",
+year:2023,
+director:["Aaron Horvath", "Michael Jelenic"],
+actors:["Jack Black", "Anya Taylor-Joy", "Chris Pratt", "Charlie Day"]
+})
+
+2. db.movies.find().sort({ title: 1 }).limit(5)
+
+3. db.movies.updateOne({title:"The Lion King"}, {$set:{"title":"The Lion King (1994)"}})
+
+4. db.movies.deleteOne({title:"The Lion King (1994)"})
+
+5. db.users.insertOne({
+name:"John Doe",
+email:"johndoe@example.com",
+password:"123456"
+})
+
+6. db.users.find({},{name:1})
+
+7. db.users.updateOne({email:"johndoe@example.com"}, {$set:{"name":"John Smith"}})
+
+8. db.users.deleteOne({email:"johndoe@example.com"})
+
+9. db.comments.insertOne({
+movie_id: ObjectId("573a1390f29313caabcd587d"),
+user_id: ObjectId("59b99db9cfa9a34dcd7885c0"),
+text: "Great movie! Highly recommend it"
+})
+
+10. db.comments.aggregate([
+  {
+    $lookup: {
+      from: "movies",
+      localField: "text",
+      foreignField: "title",
+      as: "movie",
+    },
+  },
+  {
+    $project: {
+      _id: 1,
+      text: 1,
+      "movie.title": 1,
+    },
+  },
+])
+
+11. db.comments.updateOne({_id:ObjectId("651190ad43632886dd270441")}, {$set:{"text":"This movie is a masterpiece"}})
+
+12. db.comments.deleteOne({_id:ObjectId("651190ad43632886dd270441")})
+
+13. db.movies.find({ genres: "Comedy" })
+
+14. db.movies.updateOne(
+  { _id: ObjectId("573a1390f29313caabcd4803") },
+  { $addToSet: { genres: "Drama" } }
+)
+
+15. db.movies.deleteMany({ year: { $lt: 2000 } })
+
+16. db.movies.find(
+  { year: { $gte: 2010, $lte: 2020 } },
+).sort(
+  { "tomatoes.viewer.rating": -1 }
+)
+
+17. db.movies.updateMany(
+  { year: 2015 }, // Filter movies released in 2015
+  { $set: { year: 2016 } } // Update the year to 2016
+)
+
+18. db.movies.deleteMany({ director: "Christopher Nolan" })
+
+19. db.users.insertOne({email:"admin@example.com"})
+
+19.5. db.users.find({email: {$regex:/admin/}})
+
+20. db.comments.updateOne({email:"johndoe@example.com"}, {$set:{"password":"newpassword"}})
+
+21. db.comments.deleteMany({ userEmail: "johndoe@example.com" })
+
+22. db.movies.createIndex({title: 1})
+
+23. db.movies.find({title: {$regex:/^A/}})
+
+24. db.movies.updateMany(
+  { genres: "Action" },
+  { $set: { genres: "Adventure" } } 
+)
+
+25. db.users.updateOne({_id:ObjectId("59b99db9cfa9a34dcd7885c0")},{$set:{lastLogin: new Date('December 17, 1995')}})
+
+25.5. var sixMonthsAgo = new Date();
+sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+db.users.deleteMany({ lastLoginDate: { $lt: sixMonthsAgo } })
+
+26. db.movies.aggregate([
+  {
+    $group: {
+      _id: null,
+      averageRating: { $avg: "$tomatoes.viewer.rating" }
+    }
+  }
+])
+
+27. db.movies.updateOne({_id:ObjectId("573a1393f29313caabcdcb42")}, {$set:{"tomatoes.viewer.rating":4.5}})
+
+28. db.comments.insertOne({text:"spoiler"})
+
+29. db.comments.deleteOne({text:"spoiler"})
+
+30. db.movies.aggregate([
+  {
+    $project: {
+      title: { $toUpper: "$title" },
+    }
+  },
+  {
+    $out: "movies"
+  }
+])
+
