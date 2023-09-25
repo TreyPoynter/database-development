@@ -1,5 +1,5 @@
 db.Bug.createIndex({title: 1})
-db.User.createIndex({givenName: 1})
+db.User.createIndex({fullName: 1})
 
 db.Bug.insertOne({
     title: "My Super Awesome Bug",

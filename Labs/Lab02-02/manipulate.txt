@@ -1,0 +1,64 @@
+1. db.User.insertOne({email: "newDev@comp.com", password: "5678", role:["Developer"], fullName:"Jane Doe", givenName:"Jane", familyName:"Doe"})
+2.
+db.Bug.insertOne({
+    title: "Janes Bug",
+    description: "dammit dane",
+    reproduceSteps: ["Click on that"],
+    author: {
+        _id: ObjectId()
+    },
+    dateCreated: new Date("2023-09-22T00:00:00.000+00:00"),
+    classification: "unclassified",
+    comments: [
+        {
+            _id: ObjectId(),
+            _userId: ObjectId(),
+            fullName: "John Doe",
+            comment: "why are you like this",
+            createdOn: new Date("2023-09-22T00:00:00.000+00:00")
+        }
+    ],
+    testCases: [
+        {
+            _userId: ObjectId(),
+            isPassed: false,
+            createdOn: new Date("2023-09-22T00:00:00.000+00:00"),
+            version: "v0.1.2"
+        }
+    ],
+    isClosed: false,
+    timeLog: [
+        {
+            _userId: ObjectId(),
+            hoursWorked: 3
+        }
+    ],
+    assignedTo: {
+        _userId: ObjectId(),
+        fullName: "Gee Money"
+    }
+})
+3. db.Bug.updateOne({title:"Janes Bug"}, {$set:"assignedTo._userId": ObjectId("650db8d5fde29c7e341ea622")})
+4. db.Bug.updateOne({title:"Janes Bug"}, {$push:{"comments": {
+    _userId: ObjectId(),
+    fullName: "New Commentor",
+    comment: "FIX THIS",
+    createdOn: new Date("2023-09-22T00:00:00.000+00:00")
+}}})
+5. db.Bug.updateOne({title:"Janes Bug"}, {$push:{"testCases": {
+    _userId: ObjectId(),
+    isPassed: true,
+    createdOn: new Date("2023-09-22T00:00:00.000+00:00"),
+    version: "v0.1.5"
+}}})
+6. db.Bug.updateOne({title:"Janes Bug"}, {$push:{"timeLog": {
+    _userId: ObjectId(),
+    hoursWorked: 3,
+}}})
+7. db.Bug.updateOne({title:"Janes Bug"}, {$push:{"testCases": {
+    _userId: ObjectId("650c70a5da49b4009fb354a2"),
+    isPassed: true,
+    createdOn: new Date(),
+    version: "v0.1.5"
+}}})
+8. db.Bug.updateOne({title:"Janes Bug"}, {$set:"isClosed":true})
