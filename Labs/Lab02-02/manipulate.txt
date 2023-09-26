@@ -61,4 +61,4 @@ db.Bug.insertOne({
     createdOn: new Date(),
     version: "v0.1.5"
 }}})
-8. db.Bug.updateOne({title:"Janes Bug"}, {$set:"isClosed":true})
+8. db.Bug.updateOne({title:"Janes Bug"}, {$set:{"isClosed":true}})
