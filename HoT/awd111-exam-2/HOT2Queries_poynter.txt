@@ -1,0 +1,47 @@
+1. db.listingsAndReviews.insertOne({
+	name:"Marvin Gardens",
+	property_type:"Yellow",
+	price: 280
+})
+
+2. db.listingsAndReviews.find()
+
+3. db.listingsAndReviews.find({property_type:"Apartment"})
+
+4. db.listingsAndReviews.updateOne({_id:"1001265"}, {$set:{name:"Boardwalk"}})
+
+5. db.listingsAndReviews.deleteOne({_id:"1001265"})
+
+6. db.listingsAndReviews.find({ price: { $gt: 200 } })
+
+7. db.listingsAndReviews.createIndex({name:1})
+
+8. db.listingsAndReviews.find({}, { _id: 0, name: 1, price: 1 })
+
+9. db.listingsAndReviews.find().limit(5)
+
+10. db.listingsAndReviews.find({_id:"10069642"})
+
+11. db.listingsAndReviews.updateOne({_id:"10069642"}, {$set:{price:500.50}})
+
+12. db.listingsAndReviews.deleteMany({property_type:"House"})
+
+13. db.listingsAndReviews.find({ name: { $regex: /Luxury/i } })
+
+14. db.createCollection("guests")
+
+15. db.guests.insertOne({
+    name: "Mr. Monopoly",
+    age: 87,
+    email:"richpennybags@boardwalk.com"
+})
+
+16. db.guests.find()
+
+17. db.guests.updateOne({_id:ObjectId("651431f3d06c38318d948c6b")}, {$set:{age:88}})
+
+18. db.guests.deleteOne({_id:ObjectId("651431f3d06c38318d948c6b")})
+
+19. db.guests.find({ age: { $gt: 30 } })
+
+20. db.guests.drop()
